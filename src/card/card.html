@@ -1,0 +1,25 @@
+<section id="card" class="card-page" hidden aria-labelledby="card-title">
+  <div class="card-intro"><h1 id="card-title">把今天的成果，帶走。</h1><p>做過哪些題目、下一次想怎麼用 AI。留一張屬於自己的學習卡。</p></div>
+  <button id="jump-preview" class="mobile-preview-jump" type="button"><span id="mobile-preview-count">還沒選題目 · 看我的帶走卡</span>ARROW</button>
+  <div class="card-layout">
+    <form class="card-form" id="card-form" novalidate>
+      <fieldset class="choose-questions"><legend>今天，我嘗試了這些題目</legend><p class="field-description">勾選做過或嘗試過的題目，不必全部完成。</p>QUESTION_CHOICES</fieldset>
+      <div class="form-section"><label for="card-reflection">下一次，我想用 AI 做…… <span>選填</span></label><textarea id="card-reflection" rows="3" maxlength="120" placeholder="例如：把社團帳本整理成一張每月收支圖。"></textarea><div class="idea-buttons" aria-label="反思起手句"><button type="button" data-idea="把期中報告的資料整理成圖表。">期中報告</button><button type="button" data-idea="把社團帳本整理成每月收支圖。">社團帳本</button><button type="button" data-idea="做一個幫我核對實習工作資料的小工具。">實習工作</button></div></div>
+      <div class="form-section"><label for="card-url">想保留的作品連結 <span>選填</span></label><input id="card-url" type="url" maxlength="400" placeholder="https://…" aria-describedby="url-help url-error"><p class="field-description" id="url-help">填入後會做成 QR。請先確認分享權限，讓未來的你也開得了。</p><p class="field-error" id="url-error" role="alert" hidden>請填入完整的 http:// 或 https:// 網址，或留空。</p></div>
+      <div class="identity-fields"><div><label for="card-name">名字 <span>選填</span></label><input id="card-name" type="text" maxlength="32" autocomplete="off" placeholder="你的名字"></div><div><label for="card-group">組別 <span>選填</span></label><input id="card-group" type="text" maxlength="24" autocomplete="off" placeholder="例如：第 3 組"></div></div>
+      <div class="download-actions"><button type="button" id="download-card" class="solid-action">下載我的帶走卡 <span>PDF</span></button><button type="button" id="print-card" class="text-action">列印／另存 PDF</button><p id="card-feedback" role="status" aria-live="polite"></p></div>
+      <div class="draft-note"><span id="draft-status" role="status" aria-live="polite">草稿只存在這個瀏覽器，不會送給老師。</span><button id="clear-draft" type="button">清除草稿</button></div>
+    </form>
+    <div class="preview-panel"><div class="preview-heading"><span>我的帶走卡</span><span>即時預覽</span></div>
+      <div id="card-preview" class="learning-card">
+        <div class="learning-card-header"><div><span class="preview-brand">AI 賦能會計</span><h2>我的學習足跡</h2><p id="preview-identity">每一次嘗試，都有下一步。</p></div><div class="practice-dial">DIAL<dl><dt id="preview-count">0</dt><dd>題嘗試</dd></dl></div></div>
+        <div id="preview-stages" class="preview-stages"></div>
+        <div class="preview-reflection"><h3>下一次，我想用 AI 做……</h3><p id="preview-reflection">把一個想法，變成可以試試看的事。</p></div>
+        <div class="preview-work" id="preview-work" hidden><canvas id="preview-qr" width="220" height="220" aria-label="作品連結QR"></canvas><div><h3>我想保留的作品</h3><a id="preview-work-link" target="_blank" rel="noopener noreferrer"></a></div></div>
+        <div class="preview-card-footer"><div class="footprint-key"><i></i>自己記錄的嘗試</div><span>不是通關分數或能力認證</span></div>
+      </div>
+      <p class="preview-note">PDF 會整理成一頁，附上六個卡關方法。名字、一句話與作品連結，都可以留白。</p>
+      <a class="after-card" href="#contents">想再試一題？回解題筆記 ARROW</a>
+    </div>
+  </div>
+</section>
