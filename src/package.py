@@ -27,10 +27,12 @@ with zipfile.ZipFile(zip_path,'w',zipfile.ZIP_DEFLATED,compresslevel=6) as z:
     z.writestr('index.html',offline)
     z.writestr('使用說明.txt',instructions)
     for f in manifest['files']:z.write(out/f['path'],arcname=f['path'])
+    for f in sorted((out/'brand').iterdir()):
+        if f.is_file():z.write(f,arcname='brand/'+f.name)
 with zipfile.ZipFile(zip_path) as z:
     assert z.testzip() is None
-    assert len(z.namelist())==58
+    assert len(z.namelist())==58+len([f for f in (out/'brand').iterdir() if f.is_file()])
     assert len([p for p in z.namelist() if p.startswith('素材/')])==56
-summary={'package':str(zip_path.relative_to(root)).replace('\\','/'),'bytes':zip_path.stat().st_size,'sha256':hashlib.sha256(zip_path.read_bytes()).hexdigest(),'entries':58,'materials':56,'questions':19,'questionArchivesExcludedToAvoidDuplicateMaterials':True}
+summary={'package':str(zip_path.relative_to(root)).replace('\\','/'),'bytes':zip_path.stat().st_size,'sha256':hashlib.sha256(zip_path.read_bytes()).hexdigest(),'entries':58+len([f for f in (out/'brand').iterdir() if f.is_file()]),'materials':56,'questions':19,'questionArchivesExcludedToAvoidDuplicateMaterials':True}
 (base/'package-results.json').write_text(json.dumps(summary,ensure_ascii=False,indent=2),encoding='utf-8')
 print(json.dumps(summary,ensure_ascii=False))

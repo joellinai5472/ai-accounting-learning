@@ -12,12 +12,17 @@ for q in questions:
         assert source.is_file() and source.read_bytes()==target.read_bytes(),file
 for name in ['app.js','qrcodegen.js','pdf-lib.js','card.js','practice.js','style.css']:
     assert (out/'assets'/name).is_file(),name
+for name in ['favicon.svg','favicon.ico','favicon-32.png','apple-touch-icon.png','logo-512.png']:
+    assert (out/'brand'/name).is_file(),name
+assert 'rel="icon"' in s and 'brand/favicon.svg?v=20261007' in s
 for path in ['index.html','assets/app.js','assets/card.js','assets/practice.js']:
     text=(out/path).read_text(encoding='utf-8')
     assert not any(mark in text for mark in ['chatgpt.com/c/','@gmail.com','C:/Users/','C:\\Users\\','speaker_note','human_todo']),path
 archive=out/'下載/AI賦能會計_完整練習包.zip'
 with zipfile.ZipFile(archive) as z:
-    assert z.testzip() is None and len(z.namelist())==58
+    assert z.testzip() is None and len(z.namelist())==63
+    for source in (root/'brand').iterdir():
+        if source.is_file():assert z.read('brand/'+source.name)==source.read_bytes()
     page=z.read('index.html').decode('utf-8')
     assert 'data-offline-package="true"' in page
     assert '<script src=' not in page and '<link rel="stylesheet"' not in page

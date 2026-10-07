@@ -41,3 +41,8 @@ assert len(files)==56 and len({f['path'] for f in files})==56
 (base/'source-hashes.json').write_text(json.dumps(hashes,ensure_ascii=False,indent=2),encoding='utf-8')
 (base/'asset-manifest.json').write_text(json.dumps({'files':files,'totalBytes':sum(x['bytes'] for x in files)},ensure_ascii=False,indent=2),encoding='utf-8')
 print(json.dumps({'questions':len(cards),'materialsCopied':len(files),'sourceBytes':sum(f['bytes'] for f in files),'questionArchives':sum(bool(c.get('archive')) for c in practice)},ensure_ascii=False))
+for source in (root/'brand').iterdir():
+    if source.is_file():
+        target=out/'brand'/source.name
+        target.parent.mkdir(exist_ok=True)
+        shutil.copyfile(source,target)
